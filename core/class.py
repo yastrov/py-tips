@@ -10,6 +10,7 @@ class A:
 
     def __init__ (self):
         #super(A, self).__init__()
+        # Initialization
         pass
 
     def __getattr__(self, name):
@@ -49,6 +50,12 @@ class A:
 
     def foo(self):
         print('Hello!')
+
+    def __call__(self):
+        """Пример:
+        a = A()
+        a()"""
+        pass
 
 
 class B(A):
@@ -102,3 +109,11 @@ if __name__ == '__main__':
         a.email = 'badaddress'
     except ValueError as e:
         print("Invalid email value!")
+
+    # Attention! It is bad practice!
+    # Modification of the class while the script work.
+    l = lambda self: print("It is new function: say_hello!")
+    A.say_hello = l
+    a.say_hello()
+    type(a).say_h = lambda self: print("It is say_h!")
+    a.say_h()
