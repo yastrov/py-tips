@@ -25,7 +25,7 @@ class A:
         self.__dict__[name] = value
 
     def __repr__ (self):
-        """Представление для вывода"""
+        """Представление для машинно-ориентированного вывода"""
         return '<{}.{} object at {}>'.format(
                 self.__class__.__module__,
                 self.__class__.__name__,
@@ -104,9 +104,9 @@ if __name__ == '__main__':
         print('"a" has attribute: foo')
         a.foo()
 
-    a = Account()
+    ac = Account()
     try:
-        a.email = 'badaddress'
+        ac.email = 'badaddress'
     except ValueError as e:
         print("Invalid email value!")
 
