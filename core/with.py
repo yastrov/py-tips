@@ -55,7 +55,8 @@ class Wrapper:
             pass
         else:
             print(exc_value)
-        obj.close()
+        # For example without check for self.obj exists
+        self.obj.close()
 
 
 if __name__ == '__main__':
