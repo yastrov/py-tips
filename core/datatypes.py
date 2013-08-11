@@ -130,10 +130,11 @@ mes = message.format(**table)
 
 ################################
 print("# Set")
-varSet = {1,2,3,4,5}
+varSet = {1, 2, 3, 4, 5}
+my_set = {i ** 2 for i in range(10)}
 print(type(varSet))
 print(2 in varSet)
-
+# Exist unchangeable version: frozenset
 ################################
 print("# Decimal")
 #Decimal (Например для валют)
@@ -155,3 +156,14 @@ print("# Fraction")
 #http://asvetlov.blogspot.ru/2012/08/numerics.html
 from fractions import Fraction
 Fraction(7, 71) * 71 == 7
+
+################################
+#Bytes - unchangeable
+b1 = b'hello'
+b2 = 'Привет'.encode('utf-8')
+ub2 = b'\xd0\x9f\xd1\x80\xd0\xb8\xd0\xb2\xd0\xb5\xd1\x82'.decode('utf-8')
+b3 = bytes('hello', encoding = 'utf-8')
+
+#changeable version:
+b = bytearray(b'hello world!')
+result = bytearray.fromhex('deadbeef')
