@@ -2,6 +2,8 @@
 #encoding: utf-8
 
 __doc__ = """Iterator examples, snippets.
+Also this snippet may be one solid class,
+which contain __next__ and __iter__.
 """
 
 class Iterator:
@@ -10,6 +12,7 @@ class Iterator:
         self.it = 0
         self.max_int = max_int
 
+    # Or __next__(self):
     def next(self):
         self.it = self.it + 1
         if self.it > self.max_int:
