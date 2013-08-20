@@ -23,6 +23,7 @@ data = (1, 2, 3)
 ################################
 print("# List")
 l = list()
+l = [[] for _ in range(5)]
 l = ['1', '2', '3', '4'] # list
 print(dir(l)) #What methods are exists
 l1 = l[:] # Slice, copy of list
