@@ -34,6 +34,11 @@ if n is not None:
 if n not in [1,2]:
     pass
 
+i = 5
+# использовать скобки запрещено!
+if 1 < i < 10:
+    pass
+
 #Logick operators: and, or
 #return type of one from operator.
 t = type(3 or 'a')
