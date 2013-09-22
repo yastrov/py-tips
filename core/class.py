@@ -8,7 +8,7 @@ class A:
     """Class A example."""
     x = 5
 
-    def __init__ (self):
+    def __init__(self):
         #super(A, self).__init__()
         # Initialization
         pass
@@ -19,19 +19,25 @@ class A:
         attribute lookup algorithm. """
         print("__getattr__: {}".format(name))
         return None
+        
+    #def __getattribute__(self, keyy):
+    #    """Call only for exists attributes."""
+    #    return key
 
     def __setattr__(self, name, value):
         print("__setattr__: {}".format(name))
         self.__dict__[name] = value
 
-    def __repr__ (self):
+    def __repr__(self):
         """Представление для машинно-ориентированного вывода"""
         return '<{}.{} object at {}>'.format(
                 self.__class__.__module__,
                 self.__class__.__name__,
                 hex(id(self)) )
 
-    def __str__ (self): pass
+    def __str__(self): pass
+
+    #ef __dir__(self): pass
 
     #Деструктор
     #def __del__(self): pass
@@ -63,11 +69,16 @@ class B(A):
         super(B, self).__init__()
         self.arg = arg
 
-    def getX(self):
+    def get_x(self):
         return self.x
 
-    def setX(self, value):
+    def set_x(self, value):
         self.x = value
+
+    x_wrap = property(get_X, set_x)
+    #b = B()
+    #b.x_wrap = 7
+    #b.x_wwap
 
 
 class Account:
