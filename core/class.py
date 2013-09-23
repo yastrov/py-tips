@@ -37,7 +37,7 @@ class A:
 
     def __str__(self): pass
 
-    #ef __dir__(self): pass
+    #def __dir__(self): pass
 
     #Деструктор
     #def __del__(self): pass
@@ -53,6 +53,11 @@ class A:
     def f2(cls):
         """Модификация аттрибутов самого класса"""
         cls.x = 4
+
+    @classmethod
+    def from_file(cls, fname):
+        data = open(fname, "r").read()
+        return cls(data)
 
     def foo(self):
         print('Hello!')
@@ -78,7 +83,11 @@ class B(A):
     x_wrap = property(get_X, set_x)
     #b = B()
     #b.x_wrap = 7
-    #b.x_wwap
+    #b.x_wrap
+    
+    #Call parent method
+    def __setitem__(self, key, value):
+        A.__setitem__(self, key, value)
 
 
 class Account:
@@ -91,13 +100,18 @@ class Account:
         if '@' not in value:
             raise ValueError('Invalid email address.')
         self._email = value
+        
+    @email.deleter
+    def email(self):
+        del self._email
 
 
 if __name__ == '__main__':
     a = A()
     print(type(a))
     print(isinstance(a, A))
-    a.y = 8
+    print(issubclass(B, A))
+    a.y = 8 #setattr(a, 'y', 8)
     el = a.y
     el =  a.z #We have no 'z' in class A
     print(a.y) #Without call any 'get'. ()
