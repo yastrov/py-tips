@@ -12,8 +12,8 @@ class Iterator:
         self.it = 0
         self.max_int = max_int
 
-    # Or __next__(self):
-    def next(self):
+    # Only __next__(self):
+    def __next__(self):
         self.it = self.it + 1
         if self.it > self.max_int:
             raise StopIteration
@@ -28,6 +28,21 @@ class WrapperIterator:
     def __iter__(self):
         return Iterator(self.max_int)
 
+
+# Second var: only one class
+class IterB:
+    def __init__(self, max_int):
+        self.max_int = max_int
+        self.it = 0
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        self.it = self.it + 1
+        if self.it > self.max_int:
+            raise StopIteration
+        return self.it
 
 if __name__ == '__main__':
     for x in WrapperIterator(5):
