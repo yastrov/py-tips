@@ -30,6 +30,16 @@ with open(filename, 'r') as f:
 
 Смотри: http://koder-ua.blogspot.ru/2011/12/with.html
 http://www.python.org/dev/peps/pep-0343/
+
+Вариант создание 2:
+import contextlib
+@contextlib.contextmanager
+def some_generator(<arguments>):
+    <setup>
+    try:
+        yield <value>
+    finally:
+        <cleanup>
 """
 
 class Wrapper:
