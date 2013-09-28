@@ -168,3 +168,14 @@ b3 = bytes('hello', encoding = 'utf-8')
 #changeable version:
 b = bytearray(b'hello world!')
 result = bytearray.fromhex('deadbeef')
+
+from collections import OrderedDict, namedturple
+# OrderedDict сохраняет порядок ключей
+d = {'zero':0, 'two':2 ,'one':1}
+ordered_d = OrderedDict(sorted(d.items(), key=lambda x: x[0]))
+# namedturple ведёт себя как кортеж. Возможно
+# использовать в качестве структуры вместо класса.
+Point = namedtuple('Point', ['x', 'y'])
+p = point(x=1, y=2)
+print(p.x)
+print(p[0])
