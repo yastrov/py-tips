@@ -39,6 +39,8 @@ i = 5
 if 1 < i < 10:
     pass
 
+x = 7 if i == 5 else 9
+
 #Logick operators: and, or
 #return type of one from operator.
 t = type(3 or 'a')
@@ -47,6 +49,8 @@ print("3 or 'a' have type %s" %t)
 #Loops
 while True:
     pass
+else:
+    print('The for loop is over')
 
 i = 0
 while i < 10:
@@ -54,7 +58,13 @@ while i < 10:
     i +=1
 
 for el in [1, 2, 3]:
+    if el == 1:
+        continue
+    elif el == 3:
+        break
     print(el)
+else:
+    print('The for loop is over')
 
 if __name__ == '__main__':
     pass
