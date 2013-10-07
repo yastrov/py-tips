@@ -22,7 +22,7 @@ data = (1, 2, 3)
 
 ################################
 print("# List")
-l = list()
+l = list() # l = []
 l = [[] for _ in range(5)]
 l = ['1', '2', '3', '4'] # list
 print(dir(l)) #What methods are exists
@@ -90,9 +90,11 @@ print(a.items())
 ################################
 print("# String")
 s = "Hello world.\n" #Сам по себе объект string не изменяемый.
+print(dir(s)) # For all functions
 s = s.rstrip() # обрезает конец строки справа: \n, \r\n
 #see also: st.strip(),  chr(), ord()
-
+if "w" in s:
+    print("W in s string")
 #Encode
 encoding = 'utf-8'
 r = s.encode('ascii', 'ignore') #ignore, replace, strict, xmlcharrefreplace
