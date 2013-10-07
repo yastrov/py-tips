@@ -28,3 +28,7 @@ except PermissionError as ex:
 except OSError as ex:
 #except (os.error, IOError) as ex: #For before Python 3.3
     raise MyFileException(filename) from ex #Цепочки искючений. Начиная с версии 3.3
+finally:
+    pass
+else:
+    print('No exception was raised.')
