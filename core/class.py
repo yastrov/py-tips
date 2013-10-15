@@ -80,7 +80,7 @@ class B(A):
     def set_x(self, value):
         self.x = value
 
-    x_wrap = property(get_X, set_x)
+    x_wrap = property(get_x, set_x)
     #b = B()
     #b.x_wrap = 7
     #b.x_wrap
@@ -128,6 +128,7 @@ if __name__ == '__main__':
     if hasattr(a, 'foo'):
         print('"a" has attribute: foo')
         a.foo()
+    x = getattr(a, 'x', None)
 
     ac = Account()
     try:
