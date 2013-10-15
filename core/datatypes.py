@@ -12,9 +12,11 @@ n = None
 
 f = float("6.8")
 f = 6.8
+
 i = int(f)
 i = 6
-
+i = int('0xA6F', 16) #from hex, base=16
+print(hex(i))
 ################################
 #Turple
 #uneditable, unchangeable
@@ -93,6 +95,7 @@ s = "Hello world.\n" #Сам по себе объект string не изменя
 print(dir(s)) # For all functions
 s = s.rstrip() # обрезает конец строки справа: \n, \r\n
 #see also: st.strip(),  chr(), ord()
+s = s*3 # строка из 3х строк s
 if "w" in s:
     print("W in s string")
 #Encode
