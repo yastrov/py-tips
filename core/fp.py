@@ -11,6 +11,7 @@ http://kachayev.github.io/talks/uapycon2012/index.html#/
 from operator import add, mul
 import math
 from functools import reduce
+from itertools import starmap
 
 expr = "28+32+++32++39"
 reduce(add, map(int, filter(bool, expr.split("+"))))
@@ -19,6 +20,8 @@ r2 = sum(map(int, filter(bool, expr.split("+"))))
 st = ["UA", "PyCon", "2012"]
 r1 = reduce(add, map(len, st))
 r2 = sum(map(len, st))
+#Map, for only call function.
+starmap(lambda x: print(x), st)
 
 # Recursion
 def get_name():
@@ -40,6 +43,9 @@ simple_sum = fsum(int) ## fsum(lambda x: x)
 fsum(lambda x: x*2)(1, 10)
 import functools
 fsum(functools.partial(mul, 2))(1, 10)
+
+basetwo = functools.partial(int, base=2)
+basetwo('10010')
 
 # Hints
 map(str, range(5))
