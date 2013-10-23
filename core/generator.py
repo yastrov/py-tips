@@ -87,6 +87,28 @@ def get_pair2(iterable, fil=None):
         result[1] = next(it)
         yield result
 
+def get_num_from_list(iteration, num=2, fil=None):
+    """
+    Get num elements from iteration (full iteration support with
+    bufferisation on the end step.) and complete chain with fill,
+    if needs more elements for complete.
+    >>> list(get_num_from_list([1, 2, 3, 4], num=3, fill=None))
+    [[1, 2, 3], [4, None, None]]
+    """
+    i = iter(iteration)
+    while True:
+        result = []
+        # yield [next(i) for _ in range(num)]
+        for _ in range(num):
+            try:
+                result.append(next(i))
+            except StopIteration:
+                while len(result) < num:
+                    result.append(fill)
+                yield result
+                raise StopIteration
+        yield result
+
 if __name__ == '__main__':
     for n, el in numerate(['a','b','c']):
         print("{} - {}".format(n, el))
