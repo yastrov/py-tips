@@ -95,6 +95,7 @@ s = "Hello world.\n" #Сам по себе объект string не изменя
 print(dir(s)) # For all functions
 s = s.rstrip() # обрезает конец строки справа: \n, \r\n
 #see also: st.strip(),  chr(), ord()
+l = s.split() # split(delimeter): string -> list
 s = s*3 # строка из 3х строк s
 if "w" in s:
     print("W in s string")
