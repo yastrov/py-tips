@@ -18,3 +18,14 @@ from io import StringIO, BytesIO
 #StringIO Реализует интерфейс работы с файлами для строк
 #BytesIO Реализует интерфейс работы с файлами для строк
 #В Python работа идет в соответствии с интерфейсом, а не типом объекта.
+
+def foo(arg=None):
+    x = arg or []
+
+def func(*args, **kwargs):
+    print(args)
+    print(kwargs)
+
+func(1, [2,3,4], age=23) # age in kwargs, others in args
+func({"age":23}) # dict in args
+func(**{"age":23}) # dict in kwargs
