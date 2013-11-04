@@ -54,3 +54,22 @@ class Speaker(object):
     def __init__(self, name):
         self.name = name
 map(Speaker, ["Alexey", "Andrey", "Vsevolod"])
+
+# See, it is look like Django Objects and jQuery.
+class Context:
+    def __init__(self, items):
+        self.__items = items
+
+    def fmap(self, key):
+        self.__items = map(key, self.__items)
+        return self
+
+    def filter(self, key):
+        self.__items = filter(key, self.__items)
+        return self.__items
+
+    def result(self):
+        return self.__items
+
+l = Context([1,2,3,]).fmap(lambda x: x+1).fmap(lambda x: x*2).result()
+print(list(l))
