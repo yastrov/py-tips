@@ -13,10 +13,19 @@ import re
 import os
 import time
 from urllib.parse import urlparse
+import signal
+import sys
 
 dest_folder = os.getcwd()
 timeout = 5
 regexp = re.compile(r'"(http://.+?)"')
+
+interrupted = False
+
+def signal_handler(signal, frame):
+    print('You pressed Ctrl+C!')
+    global interrupted
+    interrupted = True
 
 def download_file(url, file_path=None, session=None):
     """
@@ -52,6 +61,8 @@ def download_file(url, file_path=None, session=None):
         os.fsync(f.fileno())
     return file_size, fname
 
+signal.signal(signal.SIGINT, signal_handler)
+
 agent = 'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:25.0) Gecko/20100101 Firefox/25.0'
 agent_dct = {'User-Agent': agent}
 # Take list of urls from web page
@@ -60,6 +71,9 @@ html_data = r.text
 raw_url_list = regexp.findall(html_data)
 
 with requests.Session() as s:
+    # s.auth = ('user', 'pass')
+    # r = s.get(...)
+    # data = r.json() # Take JSON
     s.headers.update(agent_dct)
     # Nearest code may be solution like
     # functional style: map, filter
@@ -90,4 +104,6 @@ with requests.Session() as s:
         file_size, fname = download_file(url, session=s)
         print("Downloaded: {}\nBytes: {}".format(path, file_size))
         print("-------------------------")
+        if interrupted:
+            break
         time.sleep(timeout)
