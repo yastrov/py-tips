@@ -73,3 +73,12 @@ if __name__ == '__main__':
     #Replace ',' to '.'
     r = re.sub(r'([\d\.,]+),([\d\.,]+)', r'\1.\2', s)
     print(r)
+    # Non "a": [^a]
+    #Positive lookahead:
+    re.findall("(?=b)([ab])","aa ba ca")
+    #Negative lookahead:
+    re.findall("(?!b)([ab])","aa ba ca")
+    #Positive lookbehind:
+    re.findall("(?<=b)([ab])","aa ba ca")
+    #Negative lookbehind:
+    re.findall("(?<!b)([ab])","aa ba ca")
