@@ -15,6 +15,7 @@ import time
 from urllib.parse import urlparse
 import signal
 import sys
+import base64
 
 dest_folder = os.getcwd()
 timeout = 5
@@ -27,7 +28,10 @@ def signal_handler(signal, frame):
     global interrupted
     interrupted = True
 
-def download_file(url, file_path=None, session=None):
+def download_file(url,
+                    local_fname=None,
+                    file_path=None,
+                    session=None):
     """
     url - url;
     file_path - path for save download files;
@@ -43,16 +47,16 @@ def download_file(url, file_path=None, session=None):
     for functional style.
     """
     file_path = file_path or os.getcwd()
-    local_fname, r = None, None
-    try:
-        up = urlparse(url)
-        local_fname = os.path.basename(up.path)
-    except:
-        local_fname = url.split('/')[-1]
+    if local_fname is None:
+        try:
+            up = urlparse(url)
+            local_fname = os.path.basename(up.path)
+        except:
+            local_fname = url.split('/')[-1]
     fname = os.path.join(file_path, local_fname)
     session = session or requests
     r = session.get(url, stream=True)
-    file_size = r.headers['content-length']
+    file_size = int(r.headers['content-length'])
     with open(fname, 'wb') as f:
         for chunk in r.iter_content(chunk_size=1024): 
             if chunk: # filter out keep-alive new chunks
@@ -60,6 +64,10 @@ def download_file(url, file_path=None, session=None):
         f.flush()
         os.fsync(f.fileno())
     return file_size, fname
+
+def base64decode(data):
+    u = base64.b64decode(data)
+    return u.decode("ascii")
 
 signal.signal(signal.SIGINT, signal_handler)
 
@@ -94,14 +102,17 @@ with requests.Session() as s:
             continue # I know about it.
             st = os.stat(path)
             r = s.head(url=url)
+            file_size = None
             if r.status_code == 200:
-                file_size = r.headers['content-length']
-                if st.st_size == file_size:
-                    continue
+                file_size = int(r.headers['content-length'])
+            if file_size is None:
+                continue
+            if st.st_size == file_size:
+                continue
         # Get file
         print("-------------------------")
         print("Downloading: {}".format(url))
-        file_size, fname = download_file(url, session=s)
+        file_size, fname = download_file(url, local_fname=frame, session=s)
         print("Downloaded: {}\nBytes: {}".format(path, file_size))
         print("-------------------------")
         if interrupted:
