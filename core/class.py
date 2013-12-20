@@ -7,6 +7,7 @@ __doc__ = """Class examples, snippets.
 class A:
     """Class A example."""
     x = 5
+    # __slots__ = ("x",) # May safe RAM for very much instances. x - variable
 
     def __init__(self):
         #super(A, self).__init__()
