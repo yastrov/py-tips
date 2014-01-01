@@ -11,6 +11,7 @@ Some snippets you may see at:
 def mkdir(new_dir):
     """
     Create dir with name new_dir and all prev dirs.
+    Equivalent for os.makedirs.
     """
     _path = os.path.dirname(new_dir)
     if os.path.exists(_path):
