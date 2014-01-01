@@ -74,6 +74,7 @@ a = {'zero':0, 'one':1}
 b = {}.fromkeys(['1','2','3','4'], 1)
 c = b['1']
 b['1'] = 2
+b = {x:x**3 for x in range(1, 4)}
 
 #Следующий get работает быстрее
 #и без Exception
@@ -141,6 +142,11 @@ varSet = {1, 2, 3, 4, 5}
 my_set = {i ** 2 for i in range(10)}
 print(type(varSet))
 print(2 in varSet)
+varSet | my_set # Объединение
+varSet & my_set # Пересечение
+varSet < my_set # Подмножества
+varSet - my_set # Разница
+varSet ^ my_set # Симметрическая разность
 # Exist unchangeable version: frozenset
 ################################
 print("# Decimal")
