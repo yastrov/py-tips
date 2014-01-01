@@ -34,6 +34,8 @@ print('l[2]: %s' %l[2])
 print('l[2:]: %s' %l[2:])
 print('l[1:3]: %s' %l[1:3])
 print('l[-2]: %s' %l[-2])
+l[::2]  # Указываем шаг
+a[::-1] # Переворачиваем (reverse) список
 if '1' in l:
     print("list has element '1'")
 #map object is iterator
@@ -48,6 +50,8 @@ for el in filter(foo, l_int):
     print(el)
 
 r = [x**2 for x in range(10) if x % 2 == 0]
+r[:5] = [42] # Все символы до 5 заменяются элементом "42"
+del r[::2] # Удаление каждого второго элемента
 
 r = zip([1, 2, 3], [4, 5, 6])
 print(r)
@@ -75,6 +79,10 @@ b = {}.fromkeys(['1','2','3','4'], 1)
 c = b['1']
 b['1'] = 2
 b = {x:x**3 for x in range(1, 4)}
+#Слияние двух списков в словарь:
+t1 = (1, 2, 3)
+t2 = (4, 5, 6)
+b = dict (zip(t1,t2))
 
 #Следующий get работает быстрее
 #и без Exception
@@ -146,7 +154,7 @@ varSet | my_set # Объединение
 varSet & my_set # Пересечение
 varSet < my_set # Подмножества
 varSet - my_set # Разница
-varSet ^ my_set # Симметрическая разность
+varSet ^ my_set # Исключающее или (XOR)
 # Exist unchangeable version: frozenset
 ################################
 print("# Decimal")
