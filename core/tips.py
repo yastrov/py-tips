@@ -29,3 +29,17 @@ def func(*args, **kwargs):
 func(1, [2,3,4], age=23) # age in kwargs, others in args
 func({"age":23}) # dict in args
 func(**{"age":23}) # dict in kwargs
+
+
+import sys
+if sys.stdout.isatty():
+    # You're running in a real terminal
+    # Use output format for user
+else:
+    # You're being piped or redirected
+    # Use output format for simple parsing with other utilitys
+
+if __name__ == '__main__':
+    # You're started as main module
+else:
+    # You're loaded from other module
