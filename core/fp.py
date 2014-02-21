@@ -73,3 +73,5 @@ class Context:
 
 l = Context([1,2,3,]).fmap(lambda x: x+1).fmap(lambda x: x*2).result()
 print(list(l))
+
+rightTriangles = [(a,b,c) for a in range(1,11) for b in range(1,11) for c in range(1,11) if a**2 + b**2==c**2 and a+b+c==24]
