@@ -8,6 +8,8 @@ Based on:
 http://kachayev.github.io/talks/uapycon2012/index.html#/
 """
 
+print((lambda x: x**2)(6))
+
 from operator import add, mul
 import math
 from functools import reduce
