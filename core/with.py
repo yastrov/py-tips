@@ -40,6 +40,10 @@ def some_generator(<arguments>):
         yield <value>
     finally:
         <cleanup>
+
+Пример работы с двумя объектами:
+with open(...) as fin, open(...) as fout:
+    fout.write(fin.read())
 """
 
 class Wrapper:
