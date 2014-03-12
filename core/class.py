@@ -6,7 +6,7 @@ __doc__ = """Class examples, snippets.
 
 class A:
     """Class A example."""
-    x = 5
+    x = 5 # доступ к переменной класса дольше, чем к меременной объекта.
     # __slots__ = ("x",) # May safe RAM for very much instances. x - variable
 
     def __init__(self):
