@@ -40,6 +40,8 @@ if 1 < i < 10:
     pass
 
 x = 7 if i == 5 else 9
+# Or
+if i == 5: x = 7
 
 #Logick operators: and, or
 #return type of one from operator.
@@ -56,6 +58,8 @@ i = 0
 while i < 10:
     print(i)
     i +=1
+# Or
+while i < 10: i += 1
 
 for el in [1, 2, 3]:
     if el == 1:
