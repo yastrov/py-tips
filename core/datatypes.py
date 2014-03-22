@@ -36,6 +36,9 @@ print('l[1:3]: %s' %l[1:3])
 print('l[-2]: %s' %l[-2])
 l[::2]  # Указываем шаг
 a[::-1] # Переворачиваем (reverse) список
+zip(l[::2], l[1::2])
+d = {k: v for k,v in zip(l[::2], l[1::2])}
+
 if '1' in l:
     print("list has element '1'")
 #map object is iterator
@@ -101,6 +104,7 @@ print(a.items())
 ################################
 print("# String")
 s = "Hello world.\n" #Сам по себе объект string не изменяемый.
+print( hex(ord(s[0])) )
 print(dir(s)) # For all functions
 s = s.rstrip() # обрезает конец строки справа: \n, \r\n
 #see also: st.strip(),  chr(), ord()
