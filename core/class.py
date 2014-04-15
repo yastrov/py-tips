@@ -105,6 +105,25 @@ class Account:
     @email.deleter
     def email(self):
         del self._email
+    #email = property(_getter, _setter, _deleter, "doc string")
+
+
+# Descriptor version
+class Descriptor:
+    def __init__(self, val=None):
+        self.v  = val
+    def __get__(self, obj, type):
+        print("getter used")
+        return self.v
+    def __set__(self, obj, val):
+        print("setter used")
+    def __delete__(self, obj):
+        print("deleter used")
+        del self.v
+
+
+class Account2:
+    email = Descriptor()
 
 
 if __name__ == '__main__':
