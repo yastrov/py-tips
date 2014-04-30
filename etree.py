@@ -69,3 +69,13 @@ root.findall('owl:Class', namespaces=namespaces)
 # Prefixes are only looked up in the namespaces parameter you pass in. This means you can use any namespace prefix you like; the API splits off the owl: part, looks up the corresponding namespace URL in the namespaces dictionary, then changes the search to look for the XPath expression {http://www.w3.org/2002/07/owl}Class instead. You can use the same syntax yourself too of course:
 
 root.findall('{http://www.w3.org/2002/07/owl#}Class')
+
+####
+# Thank for 
+# http://blog.asmadews.ru/2014/04/python-elementtree-undefined-entity.html
+from html.entities import entitydefs
+from xml.etree import ElementTree as ET
+
+parser = ET.XMLParser()
+parser.entity.update( entitydefs )
+xml_tree = ET.XML(_src, parser)
