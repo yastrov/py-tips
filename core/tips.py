@@ -12,6 +12,7 @@ b = 7
 #Swap
 a, b = b, a
 
+# from codecs import open #For Python 2.7
 with open(filename, 'wb', encoding='utf-8') as f:
     f.write(3)
 
