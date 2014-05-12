@@ -3,6 +3,10 @@
 
 __doc__ = """Basic tips and trics.
 """
+
+# Unix epoha time in secunds
+epoch_time = int(time.time())
+
 a = 3
 b = 7
 #Swap
