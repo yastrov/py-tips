@@ -48,9 +48,12 @@ def main():
     try:
         # args = sys.argv[1:]
         import argparse # May use click http://click.pocoo.org/
-        parser = argparse.ArgumentParser(description='Convert audiofiles with SoX.')
+        parser = argparse.ArgumentParser(description=__doc__)
         parser.add_argument("path",
-                            help="path with original sound files (required)")
+                            help="path with original sound files (required)",
+                            type=str, default="", nargs='+') # or nargs='*'
+        parser.add_argument('--l', action='append', type=int,
+                            help="List like -l 1 -l 2 of integers for sum.") # -l 1 -l 2
         parser.add_argument("-b", "--bitrate",
                             default=32, help="bitrate (default: 64)")
         parser.add_argument("-v", "--verbose", action="store_true",
