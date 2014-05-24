@@ -12,6 +12,10 @@ b = 7
 #Swap
 a, b = b, a
 
+# lambda and closure exqmple
+lambdas = [lambda a, i=i: a + i for i in range(5)]
+l = [l(1) for l in lambdas]
+
 # from codecs import open #For Python 2.7
 with open(filename, 'wb', encoding='utf-8') as f:
     f.write(3)
