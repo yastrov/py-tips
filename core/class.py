@@ -11,6 +11,7 @@ class A:
 
     def __init__(self):
         #super(A, self).__init__()
+        #super().__init__()
         # Initialization
         pass
 
@@ -57,7 +58,9 @@ class A:
 
     @classmethod
     def from_file(cls, fname):
-        data = open(fname, "r").read()
+        data = None
+        with open(fname, "r") as f:
+            data = f.read()
         return cls(data)
 
     def foo(self):
@@ -88,8 +91,15 @@ class B(A):
     
     #Call parent method
     def __setitem__(self, key, value):
-        A.__setitem__(self, key, value)
+        #A.__setitem__(self, key, value)
+        super(B, self).__setitem__(key, value)
+        # Or New for Python 3.3
+        super().__setitem__(key, value)
 
+    def foo(self):
+        """Method Overriding in Python"""
+        # Before or after local code
+        super().foo()
 
 class Account:
     @property
