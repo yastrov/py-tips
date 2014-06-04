@@ -4,6 +4,20 @@
 __doc__ = """Generator examples, snippets.
 """
 
+# generator expression = выражение - генератор
+# создаётся с помощью круглых скобок. В квадратных будет обычный список!
+f = (x*2 for x in range(5))
+
+def double_range(stop):
+    """
+    This is very simple example for "yield from".
+    In old style:
+    for x in range(stop):
+        yield x
+    """
+    yield from range(stop)
+    yield from range(stop)
+
 def numerate(iterable, num=0):
     """Core enumerate function analog"""
     n = 0
@@ -40,13 +54,25 @@ def fibonacchi(n):
     yield b
     i = 2
     n += 1
-    # for _ in range(2, n):
     while i < n:
-        F = b+a
+        F = b + a
         yield F
-        a = b
-        b = F
+        a, b = b, F
         i+=1
+        
+def fibonacchi2(n):
+    """
+    Fibonacchi numbers.
+    >>> list(fibonacchi(5))
+    [0, 1, 1, 2, 3, 5]
+    """
+    a, b = 0, 1
+    yield a
+    yield b
+    for _ in range(2, n+1):
+        F = b + a
+        yield F
+        a, b = b, F
 
 def get_pair(iterable, fil=None):
     """
@@ -108,6 +134,18 @@ def get_num_from_list(iteration, num=2, fil=None):
                 yield result
                 raise StopIteration
         yield result
+
+def f(value):
+    """
+    Thank for https://alexbers.com/python_quiz/
+    """
+    while True:
+        value = (yield value)
+
+a=f(10)
+print(next(a))
+print(next(a))
+print(a.send(20))
 
 if __name__ == '__main__':
     for n, el in numerate(['a','b','c']):
