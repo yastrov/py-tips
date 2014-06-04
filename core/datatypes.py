@@ -53,6 +53,7 @@ for el in filter(foo, l_int):
     print(el)
 
 r = [x**2 for x in range(10) if x % 2 == 0]
+print(min(r), max(r))
 r[:5] = [42] # Все символы до 5 заменяются элементом "42"
 del r[::2] # Удаление каждого второго элемента
 
@@ -74,6 +75,13 @@ print(r)
 r = all(l)
 print(r)
 
+l = [b for a in A for b in B]
+#Is equivalent to:
+l = []
+for a in A:
+  for b in B:
+    l.append(b)
+
 ################################
 print("# Dict")
 a = dict()
@@ -82,6 +90,9 @@ b = {}.fromkeys(['1','2','3','4'], 1)
 c = b['1']
 b['1'] = 2
 b = {x:x**3 for x in range(1, 4)}
+# AT!
+a = { ('one', '1'): 1, ('two', '2'): 2 }
+print( a['one', '1'] ) 
 #Слияние двух списков в словарь:
 t1 = (1, 2, 3)
 t2 = (4, 5, 6)
@@ -140,6 +151,21 @@ for c in s:
     if c.isupper():
         s = s.replace(c,c.lower())
 print(s)
+
+## START
+# Or eq
+def oper(func, iterables):
+    l = map(func, iterables)
+    return ''.join(l)
+ 
+def foo(char):
+    if char.isupper():
+        return char.lower()
+    else:
+        return char
+
+s = oper(foo, 'My homeworld')
+### END
 
 #Old style
 message = '%s : %s' %('Alice','hash')
