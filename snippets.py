@@ -13,6 +13,7 @@ def mkdir(new_dir):
     Create dir with name new_dir and all prev dirs.
     Equivalent for os.makedirs.
     """
+    import os
     _path = os.path.dirname(new_dir)
     if os.path.exists(_path):
         return
@@ -29,6 +30,9 @@ def mkdir(new_dir):
         os.mkdir(_path)
 
 ## Zip Reader and writer
+from io import BytesIO, StringIO
+import os
+import zipfile
 
 class FilesZipReader(SimpleReader):
     def __init__(self, filename):
