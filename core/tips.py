@@ -2,7 +2,14 @@
 #encoding: utf-8
 
 __doc__ = """Basic tips and trics.
+
+For profiling:
+python3 -m cProfile [-o output_file] [-s sort_order] myscript.py
 """
+
+# For perfomance: Optimizing time for access
+import os
+pjoin = os.path.join
 
 # Unix epoha time in secunds
 epoch_time = int(time.time())
@@ -39,6 +46,14 @@ func(1, [2,3,4], age=23) # age in kwargs, others in args
 func({"age":23}) # dict in args
 func(**{"age":23}) # dict in kwargs
 
+def best_return():
+    """
+    Optimizing return from function. Not create var before return.
+    dis from dis module are confirms.
+    Оптимальный код возврата из функции - без предварительного создания переменной.
+    """
+    # Not a = (1,2)
+    return (1, 2)
 
 import sys
 if sys.stdout.isatty():
