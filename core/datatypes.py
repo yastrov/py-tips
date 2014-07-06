@@ -63,6 +63,7 @@ r = zip([1, 2, 3], [4, 5, 6])
 print(r)
 seasons = ['Spring', 'Summer', 'Fall', 'Winter']
 r = sorted(seasons, key=len)
+seasons.sort(key=len) # Faster then sorted, no return
 print(r) #Sort list by len() function
 r = ','.join(seasons) # ->string
 print(r)
