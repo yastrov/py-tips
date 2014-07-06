@@ -29,6 +29,8 @@ l = [[] for _ in range(5)]
 l = ['1', '2', '3', '4'] # list
 print(dir(l)) #What methods are exists
 l1 = l[:] # Slice, copy of list
+print( l == ll ) # You can compare dict's like this
+print( l is ll )
 print('l: %s' %l)
 print('l[2]: %s' %l[2])
 print('l[2:]: %s' %l[2:])
