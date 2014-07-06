@@ -8,6 +8,13 @@ dir(object) - список методов и переменных объекта
 id(object) - адрес объекта в памяти.
 
 !строки не изменяемы!
+
+Comparsions: in, not in, is, is not, <, <=, >, >=, <>, !=, ==
+
+operator is
+x is y
+is equvalent for:
+id(x) == id(y)
 """
 
 #If and None problem
