@@ -11,6 +11,9 @@ python3 -m cProfile [-o output_file] [-s sort_order] myscript.py
 import os
 pjoin = os.path.join
 
+# Advanced unpack
+a, b, *args, c  = list(range(10))
+
 # Unix epoha time in secunds
 epoch_time = int(time.time())
 
@@ -45,6 +48,10 @@ def func(*args, **kwargs):
 func(1, [2,3,4], age=23) # age in kwargs, others in args
 func({"age":23}) # dict in args
 func(**{"age":23}) # dict in kwargs
+
+#Keyword only argumant
+def f(a, b, *args, option=True):
+    print(args)
 
 def best_return():
     """
