@@ -115,6 +115,15 @@ print(a.keys())
 print(a.values())
 print(a.items())
 
+# List as argument
+ld = {}
+ld.setdefault('1', []).append(1)
+# Or
+from collections import defaultdict
+ld = defaultdict(list)
+ld['1'].append(1)
+
+# Alo see collections.Counter
 ################################
 print("# String")
 s = "Hello world.\n" #Сам по себе объект string не изменяемый.
