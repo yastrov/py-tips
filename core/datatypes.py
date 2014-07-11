@@ -24,6 +24,7 @@ data = (1, 2, 3)
 
 ################################
 print("# List")
+# It is Array of pointers.
 l = list() # l = []
 l = [[] for _ in range(5)]
 l = ['1', '2', '3', '4'] # list
