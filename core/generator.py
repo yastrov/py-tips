@@ -67,12 +67,9 @@ def fibonacchi2(n):
     [0, 1, 1, 2, 3, 5]
     """
     a, b = 0, 1
-    yield a
-    yield b
-    for _ in range(2, n+1):
-        F = b + a
-        yield F
-        a, b = b, F
+    for _ in range(n+1):
+        yield a
+        a, b = b, b + a
 
 def get_pair(iterable, fil=None):
     """
@@ -85,10 +82,8 @@ def get_pair(iterable, fil=None):
     pool = list(iterable)
     if len(pool)%2 != 0:
         pool.append(fil)
-    i = 0
-    while i < len(pool):
-        yield pool[i:i+2]
-        i += 2
+    for k, v in zip(pool[::2], pool[1::2]):
+        yield [k, v]
 
 def get_pair2(iterable, fil=None):
     """
