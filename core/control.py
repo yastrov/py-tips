@@ -49,6 +49,8 @@ if 1 < i < 10:
 x = 7 if i == 5 else 9
 # Or
 if i == 5: x = 7
+# Also 
+x = 7 if i == 5 else 9 if i == -5 else 2
 
 #Logick operators: and, or
 #return type of one from operator.
