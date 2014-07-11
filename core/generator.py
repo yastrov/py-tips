@@ -22,7 +22,7 @@ def numerate(iterable, num=0):
     """Core enumerate function analog"""
     n = 0
     for x in iterable:
-        yield (n, x)
+        yield n, x
         n += 1
 
 def filereader(fname, encoding='utf-8'):
@@ -40,8 +40,7 @@ import os
 def walk(path):
     for root, dirs, files in os.walk(path):
         for name in files:
-            fname = os.path.join(root, name)
-            yield fname
+            yield os.path.join(root, name)
 
 def fibonacchi(n):
     """
@@ -72,7 +71,7 @@ def fibonacchi2(n):
         a, b = b, b + a
 
 def get_pair(iterable, fil=None):
-    """
+    """Best approach!
     get_pair([1,2,3,4]) --> [1,2] [3,4]
     >>> list(get_pair([1, 2, 3, 4]))
     [[1, 2], [3, 4]]
@@ -83,7 +82,9 @@ def get_pair(iterable, fil=None):
     if len(pool)%2 != 0:
         pool.append(fil)
     for k, v in zip(pool[::2], pool[1::2]):
-        yield [k, v]
+        yield k, v
+    if len(pool)%2 != 0:
+        yield pool[-1], fil
 
 def get_pair2(iterable, fil=None):
     """
