@@ -74,17 +74,15 @@ def get_pair(iterable, fil=None):
     """Best approach!
     get_pair([1,2,3,4]) --> [1,2] [3,4]
     >>> list(get_pair([1, 2, 3, 4]))
-    [[1, 2], [3, 4]]
+    [(1, 2), (3, 4)]
     >>> list(get_pair([1, 2, 3]))
-    [[1, 2], [3, None]]
+    [(1, 2), (3, None)]
     """
-    pool = list(iterable)
-    if len(pool)%2 != 0:
-        pool.append(fil)
-    for k, v in zip(pool[::2], pool[1::2]):
+    def unl(itera):
+        yield from itera
+        while True: yield fil
+    for k, v in zip(iterable[::2], unl(iterable[1::2])):
         yield k, v
-    if len(pool)%2 != 0:
-        yield pool[-1], fil
 
 def get_pair2(iterable, fil=None):
     """
@@ -114,8 +112,8 @@ def get_num_from_list(iteration, num=2, fil=None):
     Get num elements from iteration (full iteration support with
     bufferisation on the end step.) and complete chain with fill,
     if needs more elements for complete.
-    >>> list(get_num_from_list([1, 2, 3, 4], num=3, fill=None))
-    [[1, 2, 3], [4, None, None]]
+    >>> list(get_num_from_list([1, 2, 3, 4], num=3, fil=None))
+    [(1, 2, 3), (4, None, None)]
     """
     i = iter(iteration)
     while True:
@@ -130,6 +128,23 @@ def get_num_from_list(iteration, num=2, fil=None):
                 yield result
                 raise StopIteration
         yield result
+
+def get_num_from_list2(iteration, num=2, fil=None):
+    """
+    Get num elements from iteration (full iteration support with
+    bufferisation on the end step.) and complete chain with fill,
+    if needs more elements for complete.
+    >>> list(get_num_from_list([1, 2, 3, 4], num=3, fil=None))
+    [(1, 2, 3), (4, None, None)]
+    """
+    def unl(itera):
+        yield from itera
+        while True: yield fil
+    para = [iteration[i::num] if i%num == 0 else unl(iteration[i::num])
+                for i in range(num)]
+    print(para)
+    for k in zip(*para):
+        yield k
 
 def f(value):
     """
@@ -150,3 +165,7 @@ if __name__ == '__main__':
     s = os.getcwd() #Get current dir
     for path in walk(s):
         print(path)
+    for i in get_pair([x for x in range(5)]):
+        print(i)
+    for i in get_num_from_list2([x for x in range(5)], num=3, fil=None):
+        print(i)
