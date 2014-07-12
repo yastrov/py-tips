@@ -38,9 +38,10 @@ def filereader(fname, encoding='utf-8'):
 
 import os
 def walk(path):
+    pjoin = os.path.join
     for root, dirs, files in os.walk(path):
         for name in files:
-            yield os.path.join(root, name)
+            yield pjoin(root, name)
 
 def fibonacchi(n):
     """
@@ -142,7 +143,6 @@ def get_num_from_list2(iteration, num=2, fil=None):
         while True: yield fil
     para = [iteration[i::num] if i%num == 0 else unl(iteration[i::num])
                 for i in range(num)]
-    print(para)
     for k in zip(*para):
         yield k
 

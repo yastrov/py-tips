@@ -2,6 +2,9 @@
 #encoding: utf-8
 
 __doc__ = """Class examples, snippets.
+
+Доступ к свойству, находящемуся в словаре класса происходит дольше, чем
+к свойству в словаре инстацированного объекта.
 """
 
 class A:
@@ -28,6 +31,7 @@ class A:
 
     def __setattr__(self, name, value):
         print("__setattr__: {}".format(name))
+        #super().__setattr__(name, value)
         self.__dict__[name] = value
 
     def __repr__(self):
@@ -37,7 +41,7 @@ class A:
                 self.__class__.__name__,
                 hex(id(self)) )
 
-    def __str__(self): pass
+    def __str__(self): return super().__str__();
 
     #def __dir__(self): pass
 

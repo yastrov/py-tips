@@ -48,10 +48,10 @@ class FilesZipReader(SimpleReader):
     def get_namelist(self):
         return zip.namelist()
     def get_file(self, filename, asbinaryfile=True):
-        data = self.zip.read(name)
         if asbinaryfile:
-            data = BytesIO(data)
-        return data
+            return BytesIO(self.zip.read(filename))
+        else:
+            return self.zip.read(filename)
     def close(self):
         if self.zip is not None:
             self.zip.close()
