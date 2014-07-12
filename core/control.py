@@ -51,6 +51,8 @@ x = 7 if i == 5 else 9
 if i == 5: x = 7
 # Also 
 x = 7 if i == 5 else 9 if i == -5 else 2
+#Call function:
+result = (min if i == 5 else max)(1, 2)
 
 #Logick operators: and, or
 #return type of one from operator.
