@@ -2,6 +2,13 @@
 #encoding: utf-8
 
 __doc__ = """Basic datatypes.
+TimeComplexity test (Bog O notation):
+https://wiki.python.org/moin/TimeComplexity
+
+list:
+[x for x in range(5) if x%2 == 0]
+Generator (lazy):
+(x for x in range(5) if x%2 == 0)
 """
 
 #Only for example.
@@ -26,6 +33,8 @@ data = (1, 2, 3)
 print("# List")
 # It is Array of pointers.
 # http://www.laurentluce.com/posts/python-list-implementation/
+# Pattern resize by elements: 0, 4, 8, 16, 25, 35, 46, 58, 72, 88,...
+# If you need fast append and insert, use collections.deque
 l = list() # l = []
 l = [[] for _ in range(5)]
 l = ['1', '2', '3', '4'] # list
@@ -39,7 +48,7 @@ print('l[2:]: %s' %l[2:])
 print('l[1:3]: %s' %l[1:3])
 print('l[-2]: %s' %l[-2])
 l[::2]  # Указываем шаг
-a[::-1] # Переворачиваем (reverse) список
+a[::-1] # Переворачиваем (reversed analog) список
 zip(l[::2], l[1::2])
 d = {k: v for k,v in zip(l[::2], l[1::2])}
 
@@ -87,6 +96,8 @@ for a in A:
   for b in B:
     l.append(b)
 
+chars = [char for season in seasons
+              for char in season]
 ################################
 print("# Dict")
 a = dict()
@@ -124,6 +135,10 @@ ld.setdefault('1', []).append(1)
 from collections import defaultdict
 ld = defaultdict(list)
 ld['1'].append(1)
+# But more faster for count:
+freqs = {}
+for c in 'Hello world':
+    freqs[c] = freqs[c] + 1 if c in freqs else 1
 
 # Alo see collections.Counter
 ################################
@@ -152,8 +167,10 @@ r = str(b'hello', encoding)
 print(r)
 unicode_string = s.encode(encoding)
 
+# str is inner represent of strings for Py 3.3.
 #bytes -> str
 if isinstance(s, bytes) and bytes([10]) in s:
+    # In Py 2.7 you take 'unicode' type
     s = s.decode("utf-8")
 #str -> bytes
 if isinstance(s, str):
