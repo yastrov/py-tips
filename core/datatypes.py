@@ -9,6 +9,12 @@ list:
 [x for x in range(5) if x%2 == 0]
 Generator (lazy):
 (x for x in range(5) if x%2 == 0)
+
+General syntax for list comprehension:
+[expression for item1 in iterable1 if condition1
+            for item2 in iterable2 if condition2
+            ...
+            for itemN in iterableN if conditionN ]
 """
 
 #Only for example.
@@ -39,9 +45,11 @@ l = list() # l = []
 l = [[] for _ in range(5)]
 l = ['1', '2', '3', '4'] # list
 print(dir(l)) #What methods are exists
-l1 = l[:] # Slice, copy of list
+l1 = l[:] # Slice, shallow copy of list
 print( l == ll ) # You can compare dict's like this
-print( l is ll )
+print( l is ll ) # compare references (identity)
+from copy import deepcopy
+l3 = deepcopy(l) # Deep copy, if you have list of lists and other
 print('l: %s' %l)
 print('l[2]: %s' %l[2])
 print('l[2:]: %s' %l[2:])

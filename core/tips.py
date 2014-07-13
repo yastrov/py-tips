@@ -23,6 +23,9 @@ b = 7
 a, b = b, a
 
 # lambda and closure exqmple
+# lambda при "получении" переменной запоминает ее название и scope.
+# Scope глобальный и когда происходит реальный вызов функции,
+# используется последнее значение i. Чтобы избежать этого:
 lambdas = [lambda a, i=i: a + i for i in range(5)]
 l = [l(1) for l in lambdas]
 
@@ -46,6 +49,7 @@ from io import StringIO, BytesIO
 # for access to vars:
 vars() # Also vars(obj) if obj has __dict__
 locals()
+globals()
 
 def foo(arg=None, key=None):
     x = arg or []
@@ -72,6 +76,23 @@ def best_return():
     """
     # Not a = (1,2)
     return 1, 2
+
+# variables:
+# http://sebastianraschka.com/Articles/2014_python_scope_and_namespaces.html
+# Use 'global <varname>' or 'nonlocal <varname>'
+# global var
+x = 9
+def outer():
+    # enclosed level for 'inner' function.
+    x = 3
+    print('before:', x)
+    def inner():
+        # local level
+        nonlocal x # take enclosed x
+        x = 5
+        print("inner:", x)
+    inner()
+    print("after:", x)
 
 import sys
 if sys.stdout.isatty():
