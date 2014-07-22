@@ -10,6 +10,13 @@ def sortlist(lst, reverse=False):
     foo = lambda x: x[1]
     return sorted(lst, key=foo, reverse=reverse)
 
+def sort_list_mutable(lst, foo=None, reverse=False):
+    """
+    Sort list. Mutable.
+    """
+    foo = foo or lambda x: x[1]
+    lst.sort(key=foo, reverse=reverse)
+
 def dictsort(dict_, reverse=False):
     """Alphabet sort dict by keys and return sorted list of their values.
     It have been another task, I made some changes."""

@@ -26,10 +26,13 @@ n = None
 f = float("6.8")
 f = 6.8
 
+# immutable type
 i = int(f)
 i = 6
 i = int('0xA6F', 16) #from hex, base=16
 print(hex(i))
+# cahed from -5 to 256
+int("100") is int(100)
 ################################
 #Turple
 #uneditable, unchangeable

@@ -5,6 +5,15 @@ __doc__ = """Basic tips and trics.
 
 For profiling:
 python3 -m cProfile [-o output_file] [-s sort_order] myscript.py
+
+Dissasembling:
+from dis import dis
+
+def foo(): return 1
+dis(foo)
+
+gen = (x for x in range(100))
+dis(gen.gi_code)
 """
 
 # For perfomance: Optimizing time for access
@@ -22,12 +31,17 @@ b = 7
 #Swap
 a, b = b, a
 
+# Lexical scoping
+# It working with independed cell object
 # lambda and closure exqmple
 # lambda при "получении" переменной запоминает ее название и scope.
 # Scope глобальный и когда происходит реальный вызов функции,
 # используется последнее значение i. Чтобы избежать этого:
 lambdas = [lambda a, i=i: a + i for i in range(5)]
 l = [l(1) for l in lambdas]
+
+l = [lambda x=x: x for x in "abcdefg"]
+for r in l: print(r())
 
 # from codecs import open #For Python 2.7
 with open(filename, 'wb', encoding='utf-8') as f:
@@ -80,6 +94,8 @@ def best_return():
 # variables:
 # http://sebastianraschka.com/Articles/2014_python_scope_and_namespaces.html
 # Use 'global <varname>' or 'nonlocal <varname>'
+# Local objects and consts saved in code object.
+# Cache var or function to local is good idea for perfomance.
 # global var
 x = 9
 def outer():
@@ -93,6 +109,15 @@ def outer():
         print("inner:", x)
     inner()
     print("after:", x)
+
+# Optimisation loop hoisting (Just example!)
+# Optimize LOAD_ATTR and access to __dict__
+def f():
+    l = []
+    la = l.append
+    for i in range(10000): la(i)
+    return l
+# list comprehensions more faster and has own opcode LIST_APPEND
 
 import sys
 if sys.stdout.isatty():
