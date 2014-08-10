@@ -65,6 +65,8 @@ def fibonacchi2(n):
     Fibonacchi numbers.
     >>> list(fibonacchi(5))
     [0, 1, 1, 2, 3, 5]
+
+    Author Yuri Astrov
     """
     a, b = 0, 1
     for _ in range(n+1):
@@ -78,35 +80,43 @@ def get_pair(iterable, fil=None):
     [(1, 2), (3, 4)]
     >>> list(get_pair([1, 2, 3]))
     [(1, 2), (3, None)]
+
+    Author Yuri Astrov
     """
+    assert isinstance(iterable, (list, tuple)), 'Invalid input "iterable" argument type in get_pair(), should be list or tuple, received %s' % type(iterable)
     def unl(itera):
         yield from itera
         while True: yield fil
-    for k, v in zip(iterable[::2], unl(iterable[1::2])):
-        yield k, v
+    for first_el, second_el in zip(iterable[::2], unl(iterable[1::2])):
+        yield first_el, second_el
 
-def get_pair2(iterable, fil=None):
+def get_pair3(iterable, fil=None):
+    """Best approach!
+    get_pair3([1,2,3,4]) --> (1,2) (3,4)
+    >>> list(get_pair3([1, 2, 3, 4]))
+    [(1, 2), (3, 4)]
+    >>> list(get_pair3([1, 2, 3]))
+    [(1, 2), (3, None)]
+    >>> list(get_pair3((x for x in range(6))))
+    [(0, 1), (2, 3), (4, 5)]
+    >>> list(get_pair3((x for x in range(7))))
+    [(0, 1), (2, 3), (4, 5), (6, None)]
+
+    Author Yuri Astrov
     """
-    get_pair2([1,2,3,4]) --> [1,2] [3,4]
-    >>> list(get_pair2([1, 2, 3, 4]))
-    [[1, 2], [3, 4]]
-    >>> list(get_pair2([1, 2, 3]))
-    [[1, 2], [3, None]]
-    """
-    result = [None, None]
-    # If comment next block, you may use it with
-    # all iterators, but the last element without a pair will be skipped.
-    # pool = iterable
-    # start
-    pool = list(iterable)
-    if len(pool)%2 != 0:
-        pool.append(fil)
-    # end
-    it = iter(pool)
-    while True:
+    it = iter(iterable)
+    result = [None, fil]
+    flag = True
+    while flag:
         result[0] = next(it)
-        result[1] = next(it)
-        yield result
+        try:
+            result[1] = next(it)
+        except StopIteration as e:
+            result[1] = fil
+            flag = False
+        yield tuple(result)
+        #If you want to return list, you should put result = [..]
+        # to inside while loop.
 
 def get_num_from_list(iteration, num=2, fil=None):
     """
@@ -115,36 +125,47 @@ def get_num_from_list(iteration, num=2, fil=None):
     if needs more elements for complete.
     >>> list(get_num_from_list([1, 2, 3, 4], num=3, fil=None))
     [(1, 2, 3), (4, None, None)]
+
+    >>> list(get_num_from_list((x for x in range(6)), num=3, fil=None))
+    [(0, 1, 2), (3, 4, 5)]
+    >>> list(get_num_from_list((x for x in range(7)), num=3, fil=None))
+    [(0, 1, 2), (3, 4, 5), (6, None, None)]
+
+    Author Yuri Astrov
     """
     i = iter(iteration)
-    while True:
-        result = []
+    result = []
+    flag = True
+    while flag:
         # yield [next(i) for _ in range(num)]
         for _ in range(num):
             try:
                 result.append(next(i))
             except StopIteration:
+                if not result: return
                 while len(result) < num:
-                    result.append(fill)
-                yield result
-                raise StopIteration
-        yield result
+                    result.append(fil)
+                flag = False
+        yield tuple(result)
+        result.clear()
 
-def get_num_from_list2(iteration, num=2, fil=None):
+def get_num_from_list2(iterable, num=2, fil=None):
     """
     Get num elements from iteration (full iteration support with
     bufferisation on the end step.) and complete chain with fill,
     if needs more elements for complete.
-    >>> list(get_num_from_list([1, 2, 3, 4], num=3, fil=None))
-    [(1, 2, 3), (4, None, None)]
+    >>> list(get_num_from_list2([1, 2, 3, 4], num=3, fil=None))
+    [[1, 2, 3], [4, None, None]]
+
+    Author Yuri Astrov
     """
+    assert isinstance(iterable, (list, tuple)), 'Invalid input "iterable" argument type in get_num_from_list2(), should be list or tuple, received %s' % type(iterable)
     def unl(itera):
         yield from itera
         while True: yield fil
-    para = [iteration[i::num] if i%num == 0 else unl(iteration[i::num])
+    para = [iterable[i::num] if i%num == 0 else unl(iterable[i::num])
                 for i in range(num)]
-    for k in zip(*para):
-        yield k
+    return zip(*para)
 
 def f(value):
     """
