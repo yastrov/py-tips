@@ -64,7 +64,7 @@ class Wrapper:
         Например:
         return isinstance(value, TypeError)
         подавит исключения TypeError, вернув True"""
-        if exctype is None:
+        if exc_type is None:
             #All Ok, no Exceptions
             pass
         else:
