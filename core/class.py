@@ -5,6 +5,8 @@ __doc__ = """Class examples, snippets.
 
 Доступ к свойству, находящемуся в словаре класса происходит дольше, чем
 к свойству в словаре инстацированного объекта.
+
+Also you may read http://habrahabr.ru/post/186608/
 """
 
 class A:
@@ -26,7 +28,11 @@ class A:
         return None
         
     #def __getattribute__(self, keyy):
-    #    """Call only for exists attributes."""
+    #    """Call only for exists attributes.
+    #    for new-style classes only.
+    #    if you define both, __getattr__ will not be called.
+    #    http://www.devx.com/opensource/Article/31482/0/page/4 
+    #    """
     #    return key
 
     def __setattr__(self, name, value):
@@ -47,6 +53,7 @@ class A:
 
     #Деструктор
     #def __del__(self): pass
+    # Do not overload this: GC may not collect that class
 
     @staticmethod
     def f():
@@ -76,6 +83,10 @@ class A:
         a()"""
         pass
 
+    def __getitem__(self, key):
+        """a['mykey']"""
+        return self.__dict__[key]
+    #def __setitem__(self, key, value)
 
 class B(A):
     def __init__(self, arg):

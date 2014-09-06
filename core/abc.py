@@ -35,3 +35,9 @@ class Button(Pressable):
 
 assert issubclass(Button, Pressable)
 assert isinstance(Button(), Pressable)
+
+info = """For creating class, similar for
+builtins classes, based on abstract containers:
+https://docs.python.org/dev/library/collections.abc.html#module-collections.abc
+http://asvetlov.blogspot.ru/2014/09/abstract-containers.html
+"""
