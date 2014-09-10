@@ -7,6 +7,10 @@ __doc__ = """Class examples, snippets.
 к свойству в словаре инстацированного объекта.
 
 Also you may read http://habrahabr.ru/post/186608/
+
+Please, read the article about override operation.
+For example Point class:
+http://asvetlov.blogspot.ru/2014/09/magic-methods.html
 """
 
 class A:
@@ -89,15 +93,15 @@ class A:
     #def __setitem__(self, key, value)
 
 class B(A):
-    def __init__(self, arg):
+    def __init__(self, arg=None):
         super(B, self).__init__()
-        self.arg = arg
+        self._x = arg
 
     def get_x(self):
-        return self.x
+        return self._x
 
     def set_x(self, value):
-        self.x = value
+        self._x = value
 
     x_wrap = property(get_x, set_x)
     #b = B()
@@ -136,15 +140,15 @@ class Account:
 # Descriptor version
 class Descriptor:
     def __init__(self, val=None):
-        self.v  = val
+        self._v  = val
     def __get__(self, obj, type):
         print("getter used")
-        return self.v
+        return self._v
     def __set__(self, obj, val):
         print("setter used")
     def __delete__(self, obj):
         print("deleter used")
-        del self.v
+        del self._v
 
 
 class Account2:
