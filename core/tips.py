@@ -127,6 +127,10 @@ else:
     # You're being piped or redirected
     # Use output format for simple parsing with other utilitys
 
+# Best way (for Django or Flask or virtualenv) to add path to sys.path for
+#default Python importer.
+sys.path.insert(0, os.getcwd())
+
 if __name__ == '__main__':
     # You're started as main module
 else:

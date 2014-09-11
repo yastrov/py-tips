@@ -25,3 +25,9 @@ import sys
 from os.path import join, dirname
 
 __path__.append(join(dirname(__file__), sys.platform))
+
+# Best way (for Django or Flask or virtualenv) to add path to sys.path for
+#default Python importer.
+import sys
+import os
+sys.path.insert(0, os.getcwd())
