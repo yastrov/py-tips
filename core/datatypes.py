@@ -63,6 +63,10 @@ a[::-1] # Переворачиваем (reversed analog) список
 zip(l[::2], l[1::2])
 d = {k: v for k,v in zip(l[::2], l[1::2])}
 
+#Fun pair getter for generators and iterables
+num, iterable = 2, l
+zip(*[iter(iterable)]*num)
+
 if '1' in l:
     print("list has element '1'")
 #map object is iterator
