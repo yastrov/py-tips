@@ -44,7 +44,7 @@ l = [lambda x=x: x for x in "abcdefg"]
 for r in l: print(r())
 
 # from codecs import open #For Python 2.7
-with open(filename, 'wb', encoding='utf-8') as f:
+with open(filename, 'wb', encoding='utf-8', errors="replace") as f:
     f.write(3)
 
 with open(filename1, 'r') as fi, open(filename2, 'w') as fo:
