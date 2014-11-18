@@ -47,3 +47,19 @@ class IterB:
 if __name__ == '__main__':
     for x in WrapperIterator(5):
         print(x)
+
+    #next() default example
+    it = IterB(2)
+    while True:
+        n = next(it, None)
+        print(n)
+        if n is None:
+            break
+
+    #Callable iter example:
+    #Call input, while user do not enter '5'
+    [int(x) for x in iter(input, '5')]
+
+    from functools import partial
+    with open() as f
+        chunks = [chunk for chunk in iter(partial(f.read, 32), '')]
