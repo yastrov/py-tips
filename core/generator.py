@@ -27,7 +27,7 @@ def numerate(iterable, num=0):
 
 def filereader(fname, encoding='utf-8'):
     """Simple file reader on generator"""
-    with open(fname, 'r', encoding=encoding) as f:
+    with open(fname, 'r', encoding=encoding, errors='replace') as f:
         for line in f:
             l = line.strip()
             if l.startswith('#'):
@@ -149,6 +149,28 @@ def get_num_from_list(iteration, num=2, fil=None):
         yield tuple(result)
         result.clear()
 
+def get_num_from_list_up(iteration, num=2, fil=None):
+    """
+    Get num elements from iteration (full iteration support with
+    bufferisation on the end step.) and complete chain with fill,
+    if needs more elements for complete.
+    >>> list(get_num_from_list_up([1, 2, 3, 4], num=3, fil=None))
+    [(1, 2, 3), (4, None, None)]
+
+    >>> list(get_num_from_list_up((x for x in range(6)), num=3, fil=None))
+    [(0, 1, 2), (3, 4, 5)]
+    >>> list(get_num_from_list_up((x for x in range(7)), num=3, fil=None))
+    [(0, 1, 2), (3, 4, 5), (6, None, None)]
+
+    Author Yuri Astrov
+    """
+    _iter = iter(iteration)
+    while True:
+        result = [next(_iter, fil) for _ in range(num)]
+        yield tuple(result)
+        if result[-1] == fil:
+            break
+
 def get_num_from_list2(iterable, num=2, fil=None):
     """
     Get num elements from iteration (full iteration support with
@@ -167,16 +189,36 @@ def get_num_from_list2(iterable, num=2, fil=None):
                 for i in range(num)]
     return zip(*para)
 
+def get_num_from_list3(iterable, num=2, fil=None):
+    """
+    Get num elements from iteration (full iteration support with
+    bufferisation on the end step.) and complete chain with fill,
+    if needs more elements for complete.
+
+    iterable may be generator.
+
+    Example based on standart library.
+    Please, read doc for zip_longest, which
+    based on itertools.chain and repeat(fillvalue)
+
+    >>> list(get_num_from_list3(range(5), num = 3, fil='N'))
+    [(0, 1, 2), (3, 4, 'None')]
+    """
+    _iter = iter(iterable)
+    from itertools import zip_longest
+    return zip_longest(*[_iter]*num, fillvalue=fil)
+
 def f(value):
     """
     Thank for https://alexbers.com/python_quiz/
     """
     while True:
         value = (yield value)
+        yield value+1
 
 a=f(10)
 print(next(a))
-print(next(a))
+print(next(a, None))
 print(a.send(20))
 
 if __name__ == '__main__':
