@@ -13,7 +13,7 @@ For example Point class:
 http://asvetlov.blogspot.ru/2014/09/magic-methods.html
 """
 
-class A:
+class A(object): #object only for Py 2.7
     """Class A example."""
     x = 5 # доступ к переменной класса дольше, чем к меременной объекта.
     # __slots__ = ("x",) # May safe RAM for very much instances. x - variable
@@ -29,15 +29,17 @@ class A:
         cannot be found using the standard 
         attribute lookup algorithm. """
         print("__getattr__: {}".format(name))
-        return None
+        #return None
+        return super(A, self).__getattr__(name)
         
     #def __getattribute__(self, keyy):
-    #    """Call only for exists attributes.
+    #    """Call for all exists attributes.
     #    for new-style classes only.
     #    if you define both, __getattr__ will not be called.
     #    http://www.devx.com/opensource/Article/31482/0/page/4 
     #    """
     #    return key
+    #    return super(A, self).__getattribute__(keyy)
 
     def __setattr__(self, name, value):
         print("__setattr__: {}".format(name))
