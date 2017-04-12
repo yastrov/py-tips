@@ -1,0 +1,1 @@
+%LOCALAPPDATA%\Programs\Python\Python36\python -m pip install requests
