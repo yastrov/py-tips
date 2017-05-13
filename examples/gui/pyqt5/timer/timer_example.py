@@ -4,7 +4,7 @@
 from PyQt5.QtWidgets import QVBoxLayout, QLabel, QPushButton,\
                             QWidget, QMainWindow, QApplication, QMessageBox
 from PyQt5.QtCore import pyqtSlot, QTimer
-
+from PyQt5.QtCore import Qt
 
 __doc__ = '''PyQt5 Timer example'''
 
@@ -20,6 +20,8 @@ class MainWindow(QMainWindow):
 
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
+        # For safe remove C++ Backend
+        self.setAttribute(Qt.WA_DeleteOnClose)
 
         self._counter = 0
         # Создаём таймер и присваиваем в локальную переменную класса
