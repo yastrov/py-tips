@@ -106,9 +106,7 @@ class TrayIcon(QSystemTrayIcon):
             # Запросим актуальное меню
             # Хотя могли бы и self._menu использовать
             menu = self.contextMenu()
-            menu.move(current_mouse_cursor)
-            menu.show()
-            pass
+            menu.popup(current_mouse_cursor)
 
     @pyqtSlot()
     def message_clicked_slot(self):
