@@ -75,7 +75,8 @@ class TrayIcon(QSystemTrayIcon):
         # на иконку
         self.setToolTip(msg)
         # почему-то следующее не работает(
-        self.showMessage("MyTimer", msg, QSystemTrayIcon.Information, 1000)
+        if self.supportsMessages():
+            self.showMessage("MyTimer", msg, QSystemTrayIcon.Information, 1000)
 
     #@pyqtSlot(int)
     def icon_activated_slot(self, reason):
