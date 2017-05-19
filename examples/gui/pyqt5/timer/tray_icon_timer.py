@@ -32,23 +32,27 @@ class TrayIcon(QSystemTrayIcon):
         self.create_menu()
 
     def create_menu(self):
-        """Создадим меню"""
-        print('Create menu')
+        """Создадим меню
+        Внимание:
+        QSystemTrayIcon не владеет ContextMenu,
+        а потому не может быть в роли parent!"""
         # Может оно и лишнее в локальную переменную сохранять
-        self._menu = QMenu()
+        _menu = QMenu()
 
-        startA = QAction("Start Timer", self)
+        startA = QAction("Start Timer", _menu)
         startA.triggered.connect(self._timer.start)
-        self._menu.addAction(startA)
+        _menu.addAction(startA)
 
-        stopA = QAction("Stop timer", self)
+        stopA = QAction("Stop timer", _menu)
         stopA.triggered.connect(self._timer.stop)
-        self._menu.addAction(stopA)
-        self.setContextMenu(self._menu)
+        _menu.addAction(stopA)
+        
 
-        quiteA = QAction("Exit", self)
+        quiteA = QAction("Exit", _menu)
         quiteA.triggered.connect(self.exit_slot)
-        self._menu.addAction(quiteA)
+        _menu.addAction(quiteA)
+        self._menu = _menu
+        self.setContextMenu(self._menu)
 
     @pyqtSlot()
     def exit_slot(self):
